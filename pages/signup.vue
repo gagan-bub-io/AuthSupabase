@@ -17,7 +17,9 @@ async function signUpNewUser(form) {
   alert("SignUp successful")
 }
 
-
+definePageMeta({
+  middleware: ["auth"],
+});
 
 </script>
 

@@ -62,7 +62,9 @@ if(data){
   }
 }
 
-
+definePageMeta({
+  middleware: ["auth"],
+});
 </script>
 
 <template>

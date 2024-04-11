@@ -1,5 +1,5 @@
 <template>
-   <div class="flex justify-end items-center bg-amber-950 p-2">
+   <div class="flex justify-end items-center p-2">
     <div>
       <FormKit @click="signOut" type="submit" label="Signout" />
     </div>

@@ -15,6 +15,7 @@ async function signUpNewUser(form) {
   })
   console.log('data', data);  console.log('error', error);
   alert("SignUp successful")
+  navigateTo('/login')
 }
 
 definePageMeta({

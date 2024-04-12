@@ -6,6 +6,12 @@ export default defineNuxtConfig({
     // Experimental support for auto loading (see note):
     autoImport: true
   },
+  runtimeConfig: {
+    apiSecret: '', 
+    public: {
+      apiKey: process.env.GEMINI_API_KEY,
+    }
+  },
   supabase: {
     url: process.env.SUPABASE_URL,
     key: process.env.SUPABASE_KEY,

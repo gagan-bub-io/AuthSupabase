@@ -20,6 +20,9 @@ dependencies:
   '@formkit/vue':
     specifier: latest
     version: 1.6.1(tailwindcss@3.4.3)(unocss@0.58.9)(vue@3.4.21)
+  '@google/generative-ai':
+    specifier: ^0.6.0
+    version: 0.6.0
   nuxt:
     specifier: ^3.11.1
     version: 3.11.2(@unocss/reset@0.58.9)(floating-vue@5.2.2)(unocss@0.58.9)(vite@5.2.8)
@@ -835,6 +838,11 @@ packages:
       - tailwindcss
       - unocss
       - windicss
+    dev: false
+
+  /@google/generative-ai@0.6.0:
+    resolution: {integrity: sha512-jkc7vBOW/yKhNtOkpQI1jYFtAybEc0kjf8I6CpSUBWVdrVh45jIikeTlYaYckH+KtZjteARUhg26mh5XnFT6Yg==}
+    engines: {node: '>=18.0.0'}
     dev: false
 
   /@iconify/types@2.0.0:

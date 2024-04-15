@@ -19,7 +19,7 @@
             <button @click="generateContent" class="bg-blue-500 text-white px-4 py-2 rounded-r-md ml-1">ReGenerate</button>
             <button @click="Add" class="bg-blue-500 text-white px-4 py-2 rounded-r-md ml-1">Add</button>
         </div>
-        <span v-if="generatedText" class=" font-bold mt-2">Want to enter manually <button @click="navigateTo('/')" class="ml-2 text-blue-500">Manual ToDo</button></span>
+        <span v-if="generatedText" class=" font-bold mt-2">Want to enter manually <button @click="navigateTo('/humanToDo')" class="ml-2 text-blue-500">Manual ToDo</button></span>
     </div>
 
 

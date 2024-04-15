@@ -9,3 +9,9 @@
     <button @click="navigateTo('aiToDo')" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-8 rounded">AI will Add Todo</button>
   </div>
 </template>
+
+<script setup>
+ definePageMeta({
+   middleware: ["auth"],
+ });  
+</script>

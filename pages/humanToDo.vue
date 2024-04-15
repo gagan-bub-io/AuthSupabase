@@ -14,7 +14,7 @@
        </div>
      </form>
 
-     <span class=" font-bold mt-2">Want AI to create ToDo<button @click="navigateTo('/')" class="ml-2 text-blue-500">AI ToDo</button></span>
+     <span class=" font-bold mt-2">Want AI to create ToDo<button @click="navigateTo('/aiToDo')" class="ml-2 text-blue-500">AI ToDo</button></span>
 
      <!-- To showData -->
      <ul class="w-full max-w-md ml-auto mr-96">

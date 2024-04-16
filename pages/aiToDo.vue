@@ -30,7 +30,7 @@
   <h1 class="text-4xl font-bold p-9">Your Tasks</h1>
   <div class="flex justify-between border-b border-gray-950">
     <h1 class="text-lg  text-gray-700 px-4 py-2">Task</h1>
-    <h1 class="text-lg font-semibold text-gray-700 px-4 py-2">Action</h1>
+    <h1 class="text-lg  text-gray-700 px-4 py-2">Action</h1>
   </div>
   <li v-for="(todo, index) in todos" :key="index"
       class="flex items-center justify-between border-b border-gray-300">

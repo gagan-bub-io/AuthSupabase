@@ -5,23 +5,28 @@
      </div>
    </div>
 
-     <h1 class="text-3xl font-bold mb-4">Todo List</h1>
+     <h1 class="text-3xl font-bold mb-4 ml-16 mt-24">Todo List</h1>
      <!-- User Add ToDo -->
      <form @submit.prevent="Add" class="mb-4">
-       <div class="flex items-center">
+       <div class="flex items-center ml-6">
          <input type="text" id="todoInput" placeholder="enter the Task" v-model="todo" class="px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:border-blue-500" />
          <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r-md ml-1">Add</button>
        </div>
      </form>
 
-     <span class=" font-bold mt-2">Want AI to create ToDo<button @click="navigateTo('/aiToDo')" class="ml-2 text-blue-500">AI ToDo</button></span>
+     <span class=" font-bold mt-2 ml-16">Want AI to create ToDo<button @click="navigateTo('/aiToDo')" class="ml-2 text-blue-500">AI ToDo</button></span>
 
-     <!-- To showData -->
-     <ul class="w-full max-w-md ml-auto mr-96">
-  <h1 class="text-4xl font-bold">Your Task's</h1>
-  <li v-for="(todo, index) in todos" :key="index" class="flex items-center justify-between border border-gray-300 rounded p-2 mb-2">
-    <span class="w-full overflow-hidden break-words mr-4">{{ todo.Task }}</span> <!-- Display todo content -->
-    <button @click="deleteTodo(todo, index)" class=" hover:text-red-700 cursor-pointer">x</button>
+    <!-- Display todo content -->
+    <ul class="w-full max-w-2xl float-right focus-within font-medium mr-96">
+  <h1 class="text-4xl font-bold p-9">Your Tasks</h1>
+  <div class="flex justify-between border-b border-gray-300">
+    <h1 class="text-lg font-semibold text-gray-700 px-4 py-2">Task</h1>
+    <h1 class="text-lg font-semibold text-gray-700 px-4 py-2">Action</h1>
+  </div>
+  <li v-for="(todo, index) in todos" :key="index"
+      class="flex items-center justify-between border-b border-gray-300">
+      <span class="flex-1 overflow-hidden break-words text-gray-800 px-4 py-2">{{ todo.Task }}</span>
+      <button @click="deleteTodo(todo, index)" class="text-gray-500 hover:text-red-700 px-4 py-2">Delete</button>
   </li>
 </ul>
 

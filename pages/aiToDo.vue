@@ -5,34 +5,40 @@
         </div>
     </div>
 
-    <h1 class="text-3xl font-bold mb-4">AI will Generat Todo List</h1>
+    <h1 class="text-3xl font-bold mb-4 ml-16 mt-24">AI will Generat Todo List</h1>
 
-    <div class="flex items-center">
+    <div class="flex items-center ml-16">
         <input type="text" id="todoInput" v-model="promptText" placeholder="enter your prompt......"
             class="px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:border-blue-500" />
         <button @click="generateContent" class="bg-blue-500 text-white px-4 py-2 rounded-r-md ml-1">Generate</button>
     </div>
     
-    <div class="flex flex-col">
+    <div class="flex flex-col mr-96 p-5">
+        <div v-if="loading" class="flex-shrink-0 w-full max-w-[50%] overflow-hidden">AI Loding......... </div>
         <div v-if="generatedText" class="flex-shrink-0 w-full max-w-[50%] overflow-hidden">
             {{ generatedText }}<br>
-            <button @click="generateContent" class="bg-blue-500 text-white px-4 py-2 rounded-r-md ml-1">ReGenerate</button>
+            <button @click="generateContent" class="bg-blue-500 text-white px-4 py-2 rounded-r-md mt-4 ml-28">ReGenerate</button>
             <button @click="Add" class="bg-blue-500 text-white px-4 py-2 rounded-r-md ml-1">Add</button>
         </div>
-        <span v-if="generatedText" class=" font-bold mt-2">Want to enter manually <button @click="navigateTo('/humanToDo')" class="ml-2 text-blue-500">Manual ToDo</button></span>
+        <span v-if="generatedText" class=" font-bold mt-4 ml-16">Want to enter manually <button @click="navigateTo('/humanToDo')" class="ml-2 text-blue-500">Manual ToDo</button></span>
     </div>
 
 
 
     <!-- Display todo content -->
-    <ul class="w-full max-w-md float-right mr-96">
-        <h1 class="text-4xl font-bold">Your Task's</h1>
-        <li v-for="(todo, index) in todos" :key="index"
-            class="flex items-center justify-between border border-gray-300 rounded p-2 mb-2">
-            <span class="w-full overflow-hidden break-words mr-4">{{ todo.Task }}</span>
-            <button @click="deleteTodo(todo, index)" class=" hover:text-red-700 cursor-pointer">x</button>
-        </li>
-    </ul>
+    <ul class="w-full max-w-2xl float-right focus-within font-medium mr-96">
+  <h1 class="text-4xl font-bold p-9">Your Tasks</h1>
+  <div class="flex justify-between border-b border-gray-300">
+    <h1 class="text-lg font-semibold text-gray-700 px-4 py-2">Task</h1>
+    <h1 class="text-lg font-semibold text-gray-700 px-4 py-2">Action</h1>
+  </div>
+  <li v-for="(todo, index) in todos" :key="index"
+      class="flex items-center justify-between border-b border-gray-300">
+      <span class="flex-1 overflow-hidden break-words text-gray-800 px-4 py-2">{{ todo.Task }}</span>
+      <button @click="deleteTodo(todo, index)" class="text-gray-500 hover:text-red-700 px-4 py-2">Delete</button>
+  </li>
+</ul>
+
 </template>
 
 <script setup>
@@ -50,16 +56,34 @@ const loading = ref(false)
 
 const todos = ref([]);
 const todo = ref('');
-const flag = ref(true);
 
 //-----------------AI TODO----------------------
 async function generateContent() {
+   try{ loading.value=true
+    generatedText.value=null
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-    const result = await model.generateContent(promptText.value);
-    const response = await result.response;
-    const text = await response.text();
+    // const result = await model.generateContent(promptText.value);
+    // const response = await result.response;
+    // const text = await response.text();
+    
+    //...
+const result = await model.generateContentStream([promptText.value]);
+
+let text = '';
+for await (const chunk of result.stream) {
+  const chunkText = chunk.text();
+  console.log(chunkText);
+  text += chunkText;
+}
+//...
+
     console.log('text', text);
+    console.log('loading.value1', loading.value);
+    loading.value=false
+    console.log('loading.value2', loading.value);
     generatedText.value = text;
+}
+catch(error){ console.error('Error fetching data:', error); }
 }
 
 const Add = async () => {
@@ -72,7 +96,6 @@ const Add = async () => {
             ])
             .select();
         todos.value = data || [];
-
         //todos.value.push(todo.value.trim());
         todo.value = '';
         showAllTasks()
